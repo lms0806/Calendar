@@ -1,45 +1,42 @@
-/*ÀÏÁ¤°ü¸® ÇÁ·ÎÁ§Æ® 
-ÇĞ¹ø : 201611321
-ÀÌ¸§ : ÀÓ¹Î¼ö*/ 
-#include<stdio.h>//±âº» 
-#include<string.h>//strcmp µîµî 
+#include<stdio.h>//ê¸°ë³¸ 
+#include<string.h>//strcmp ë“±ë“± 
 #include<stdlib.h>
-#include<windows.h>//ÄÜ¼Ö+system 
-#include<time.h>//ÇöÀç½Ã°£ 
+#include<windows.h>//ì½˜ì†”+system 
+#include<time.h>//í˜„ì¬ì‹œê°„ 
 #include<conio.h>//gotoxy()
 
-#define LSIZE 100//ÀüÃ¼±¸Á¶Ã¼ Å©±â 
-#define SIZE 20//±¸Á¶Ã¼¾È ¹è¿­ Å©±â 
+#define LSIZE 100//ì „ì²´êµ¬ì¡°ì²´ í¬ê¸° 
+#define SIZE 20//êµ¬ì¡°ì²´ì•ˆ ë°°ì—´ í¬ê¸° 
 
-void gotoxy(int x, int y);//ui¿ë ÁÂÇ¥ 
-void init_struct();//±¸Á¶Ã¼ ÃÊ±âÈ­ 
+void gotoxy(int x, int y);//uiìš© ì¢Œí‘œ 
+void init_struct();//êµ¬ì¡°ì²´ ì´ˆê¸°í™” 
 void newmenu();//ui
 void fillmenu();//ui++ 
 
-int isyoon(int a);//À±³â Ã¼Å© 
-void calendar();//´Ş·Â 
-int check_freeday(int a,int b);//°øÈŞÀÏ Ã¼Å© 
+int isyoon(int a);//ìœ¤ë…„ ì²´í¬ 
+void calendar();//ë‹¬ë ¥ 
+int check_freeday(int a,int b);//ê³µíœ´ì¼ ì²´í¬ 
 
-void load();//·Îµå 
+void load();//ë¡œë“œ 
 void EraseSpace(char a_string[]);
-void gotomain(char a[]);//-1ÀÔ·Â½Ã main¹®À¸·Î 
-int reset_menu(int i);//ÀÔ·Â¿ë ÁÂÇ¥ 
-void input();//ÀÔ·Â 
-void modify();//¼öÁ¤ 
-int check_str(char m_name[],char a_name[]);//°Ë»ö¿ë check 
+void gotomain(char a[]);//-1ì…ë ¥ì‹œ mainë¬¸ìœ¼ë¡œ 
+int reset_menu(int i);//ì…ë ¥ìš© ì¢Œí‘œ 
+void input();//ì…ë ¥ 
+void modify();//ìˆ˜ì • 
+int check_str(char m_name[],char a_name[]);//ê²€ìƒ‰ìš© check 
 
-void find();//°Ë»ö 
-void delete1();//»èÁ¦ 
-void all_print();//ÀÏÁ¤ ÀüÃ¼Ãâ·Â 
-void check_OX();//ox Ã¼Å© 
-void check_percent();//Ã¼Å©ÇÑ ¸ñ·Ï ÀüÃ¼Ãâ·Â 
-void timeprint();//ÇöÀç½Ã°£ Ãâ·Â 
+void find();//ê²€ìƒ‰ 
+void delete1();//ì‚­ì œ 
+void all_print();//ì¼ì • ì „ì²´ì¶œë ¥ 
+void check_OX();//ox ì²´í¬ 
+void check_percent();//ì²´í¬í•œ ëª©ë¡ ì „ì²´ì¶œë ¥ 
+void timeprint();//í˜„ì¬ì‹œê°„ ì¶œë ¥ 
 void print_menu();
 void print_menu1();
-void print_menu2();//¸Ş´ºµé Ãâ·Â 
+void print_menu2();//ë©”ë‰´ë“¤ ì¶œë ¥ 
 int menu_print();
 int menu_print1();
-int menu_print2();//¸Ş´ºµé ¼±ÅÃ 
+int menu_print2();//ë©”ë‰´ë“¤ ì„ íƒ 
 
 typedef struct schedule{
 	char name[SIZE];
@@ -47,16 +44,16 @@ typedef struct schedule{
 	char month[SIZE];
 	char day[SIZE];	
 	char level[SIZE];
-}schedule;	//±¸Á¶Ã¼ È°µ¿¸í, ³âµµ, ¿ù, ÀÏ, Áß¿äµµ 
+}schedule;	//êµ¬ì¡°ì²´ í™œë™ëª…, ë…„ë„, ì›”, ì¼, ì¤‘ìš”ë„ 
 
 schedule a[LSIZE];
 
-FILE *fp;//ÆÄÀÏ 1°³ »ç¿ë 
+FILE *fp;//íŒŒì¼ 1ê°œ ì‚¬ìš© 
 
 void gotoxy(int x, int y){
 	COORD pos = {x,y};
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE),pos);
-}//ÁÂÇ¥ÁöÁ¤ ÇÔ¼ö 
+}//ì¢Œí‘œì§€ì • í•¨ìˆ˜ 
 
 void init_struct(){
 	int i;
@@ -68,36 +65,36 @@ void init_struct(){
 		a[i].day[0] = '\0';
 		a[i].level[0] = '\0';
 	}
-}//±¸Á¶Ã¼ ÃÊ±âÈ­ 
+}//êµ¬ì¡°ì²´ ì´ˆê¸°í™” 
 
 void newmenu(){
 	int i;
 	
-	printf("¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯\n");
+	printf("â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“\n");
 	for(i = 3; i < 17; i++){
 		gotoxy(0,i);
-		printf("¦­");
+		printf("â”ƒ");
 	}
 	for(i = 3; i < 17; i++){
 		gotoxy(52,i);
-		printf("¦­");
+		printf("â”ƒ");
 	}
 	printf("\n");
-	printf("¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°");
-}//¸Ş´º±×¸®±â 
+	printf("â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”›");
+}//ë©”ë‰´ê·¸ë¦¬ê¸° 
 
 void fillmenu(){
 	int i;
 	
 	for(i = 1; i < 3; i++){
 		gotoxy(0,i);
-		printf("¦­");
+		printf("â”ƒ");
 	}
 	for(i = 1; i < 3; i++){
 		gotoxy(52,i);
-		printf("¦­");
+		printf("â”ƒ");
 	}
-}//ºÎÁ·ÇÑ ºÎºĞ Ã¤¿ì±â 
+}//ë¶€ì¡±í•œ ë¶€ë¶„ ì±„ìš°ê¸° 
 
 int isyoon(int a) {
     if ((a % 4 == 0) && (a % 100 != 0) || (a % 400 == 0)) {
@@ -106,28 +103,28 @@ int isyoon(int a) {
     else {
         return 0;
     }
-}//À±³âÃ¼Å© 
+}//ìœ¤ë…„ì²´í¬ 
 
 int check_freeday(int a,int b){
-	if(a == b && (a == 1 || a == 5 || a == 6)){//1¿ù 1ÀÏ, 5¿ù 5ÀÏ, 6¿ù 6ÀÏ 
+	if(a == b && (a == 1 || a == 5 || a == 6)){//1ì›” 1ì¼, 5ì›” 5ì¼, 6ì›” 6ì¼ 
 		return 1;
 	}
-	else if(b == 9 && (a == 3 || a == 10)){//3¿ù 9ÀÏ, 10¿ù 9ÀÏ 
+	else if(b == 9 && (a == 3 || a == 10)){//3ì›” 9ì¼, 10ì›” 9ì¼ 
 		return 1;
 	}
-	else if(a-2 == b && (a == 8 || a == 3)){//8¿ù 6ÀÏ, 3¿ù 1ÀÏ 
+	else if(a-2 == b && (a == 8 || a == 3)){//8ì›” 6ì¼, 3ì›” 1ì¼ 
 		return 1;
 	}
-	else if(((a*2+1 == b || a*2-1 == b) && b % 5 == 0) && (a == 8 || a == 12)){//8¿ù 15ÀÏ, 12¿ù 25ÀÏ 
+	else if(((a*2+1 == b || a*2-1 == b) && b % 5 == 0) && (a == 8 || a == 12)){//8ì›” 15ì¼, 12ì›” 25ì¼ 
 		return 1;
 	}
-	else if((a == 3 || a == 10) && (a/3 == b)){//3¿ù 1ÀÏ, 10¿ù 3ÀÏ 
+	else if((a == 3 || a == 10) && (a/3 == b)){//3ì›” 1ì¼, 10ì›” 3ì¼ 
 		return 1;
 	} 
 	else{
 		return 0;
 	}
-}//°øÈŞÀÏ Ã¼Å© 
+}//ê³µíœ´ì¼ ì²´í¬ 
 
 void calendar(){
 	struct tm *t;
@@ -140,47 +137,47 @@ void calendar(){
 	
 	goto_loop_out:;
 	 
-	int i,j; // for¹®¿ë º¯¼ö
-    int k = 0; // ÀúÀå¿ë º¯¼ö
-    int sum = 0; // ÇöÀçÀÇ ¸ğµç ÀÏ °è»ê º¯¼ö
-    int chk = 0; // À±³â È®ÀÎ º¯¼ö
-    int basicyear[12] = { 31,28,31,30,31,30,31,31,30,31,30,31 }; // ±âº» 1~12¿ù ÀÏ¼ö
-	int key;//Å°º¸µå ¹æÇâÅ° ¾Æ½ºÅ°ÄÚµå°ª ÀĞ±â 
+	int i,j; // forë¬¸ìš© ë³€ìˆ˜
+    int k = 0; // ì €ì¥ìš© ë³€ìˆ˜
+    int sum = 0; // í˜„ì¬ì˜ ëª¨ë“  ì¼ ê³„ì‚° ë³€ìˆ˜
+    int chk = 0; // ìœ¤ë…„ í™•ì¸ ë³€ìˆ˜
+    int basicyear[12] = { 31,28,31,30,31,30,31,31,30,31,30,31 }; // ê¸°ë³¸ 1~12ì›” ì¼ìˆ˜
+	int key;//í‚¤ë³´ë“œ ë°©í–¥í‚¤ ì•„ìŠ¤í‚¤ì½”ë“œê°’ ì½ê¸° 
 	
 	system("cls");
     
 	if (isyoon(year + 1900)) {
-        chk = 1;//À±³âÀÌ¸é chk = 1; 
-        basicyear[1]++;//¹è¿­[2]ÀÎ 28À» 1Ãß°¡ 
+        chk = 1;//ìœ¤ë…„ì´ë©´ chk = 1; 
+        basicyear[1]++;//ë°°ì—´[2]ì¸ 28ì„ 1ì¶”ê°€ 
     }
     else{
         chk = 0;
-	}//À±³âÀÌ¸é 2¿ù 29ÀÏ ¾Æ´Ï¸é 28ÀÏ 
+	}//ìœ¤ë…„ì´ë©´ 2ì›” 29ì¼ ì•„ë‹ˆë©´ 28ì¼ 
 
     sum = 365;
     for (i = 1;i < year + 1900;i++) {
         if(isyoon(i)){
-            sum += 366;//À±³âÀÌ¸é 
+            sum += 366;//ìœ¤ë…„ì´ë©´ 
         }
         else{
-            sum += 365;//À±³âÀÌ ¾Æ´Ï¸é 	
+            sum += 365;//ìœ¤ë…„ì´ ì•„ë‹ˆë©´ 	
         }
-    }//0³âºÎÅÍ ÀÛ³â±îÁö ¸çÄ¥ÀÎÁö ¼À
+    }//0ë…„ë¶€í„° ì‘ë…„ê¹Œì§€ ë©°ì¹ ì¸ì§€ ì…ˆ
  
     for (i = 0;i < month;i++) {
-        sum += basicyear[i];//ÀÔ·ÂÇÑ ´Ş±îÁö ¸çÄ¥ÀÎÁö 
+        sum += basicyear[i];//ì…ë ¥í•œ ë‹¬ê¹Œì§€ ë©°ì¹ ì¸ì§€ 
     }
  
-    k = sum % 7;//1¿ù1ÀÏ ¹«½¼ ¿äÀÏÀÎÁö °è»ê(ÁÖ´ÜÀ§·Î ³ª´®) 
+    k = sum % 7;//1ì›”1ì¼ ë¬´ìŠ¨ ìš”ì¼ì¸ì§€ ê³„ì‚°(ì£¼ë‹¨ìœ„ë¡œ ë‚˜ëˆ”) 
     
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),15);
     
-    printf("\t\t%d³â %d¿ù\n",year + 1900, month + 1);
-    printf("ÀÏ\t¿ù\tÈ­\t¼ö\t¸ñ\t±İ\tÅä\n");
+    printf("\t\t%dë…„ %dì›”\n",year + 1900, month + 1);
+    printf("ì¼\tì›”\tí™”\tìˆ˜\tëª©\tê¸ˆ\tí† \n");
     printf("===================================================\n");
  
     for (j = 0;j < k;j++) {
-        printf("\t");//½ÃÀÛ ¿äÀÏ¿¡ ¸ÂÃç Á¤·Ä
+        printf("\t");//ì‹œì‘ ìš”ì¼ì— ë§ì¶° ì •ë ¬
     }
  
     for (i = 1; i <= basicyear[month]; i++){
@@ -197,52 +194,52 @@ void calendar(){
 				printf("%d\t",i);
 				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),15);
 			}
-		}//°øÈŞÀÏ 
+		}//ê³µíœ´ì¼ 
         else if (k == 6){
         	printf("%d\t", i);
             k = -1;
             printf("\n");
-        }//Åä¿äÀÏ 
+        }//í† ìš”ì¼ 
         else if(k == 0){
         	printf("%d\t", i);
-		}//ÀÏ¿äÀÏ 
+		}//ì¼ìš”ì¼ 
         else{
         	printf("%d\t", i);
-		}//ÆòÀÏ 
+		}//í‰ì¼ 
 		k++;
     }
-    printf("\n");//´Ş·ÂÃâ·Â 
+    printf("\n");//ë‹¬ë ¥ì¶œë ¥ 
     
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),15);
-    printf("Å»ÃâÇÒ·Á¸é ¾Æ¹«Å°³ª ´­·¯");
+    printf("íƒˆì¶œí• ë ¤ë©´ ì•„ë¬´í‚¤ë‚˜ ëˆŒëŸ¬");
     
-    while(1){//Å°ÀÔ·Â 
+    while(1){//í‚¤ì…ë ¥ 
     	if(kbhit()){
     		key = getch();
-    		if(key == 224 || key == 0){//¹æÇâÅ° ÀÔ·ÂÇÏ¸é 224°¡ ¸ÕÀú ³ª¿Í¼­ 
-    			key = getch();//Å°ÀÔ·Â ¹Ş±â 
+    		if(key == 224 || key == 0){//ë°©í–¥í‚¤ ì…ë ¥í•˜ë©´ 224ê°€ ë¨¼ì € ë‚˜ì™€ì„œ 
+    			key = getch();//í‚¤ì…ë ¥ ë°›ê¸° 
     			switch(key){
-    				case 72://¡èÅ¬¸¯ 
+    				case 72://â†‘í´ë¦­ 
     					year+=1;
     					goto goto_loop_out;
     					break;
-    				case 75://¡çÅ¬¸¯ 
+    				case 75://â†í´ë¦­ 
     					month-=1;
     					if(month < 0){
     						month = 11;
 							year -= 1;
-						}//1¿ù ÀüÀÌ¸é 1³â--, 12¿ù·Î 
+						}//1ì›” ì „ì´ë©´ 1ë…„--, 12ì›”ë¡œ 
     					goto goto_loop_out;
     					break;
-    				case 77://¡æÅ¬¸¯ 
+    				case 77://â†’í´ë¦­ 
     					month+=1;
     					if(month > 11){
     						month = 0;
 							year += 1;
-						}//12¿ùÀÌ Áö³ª¸é 1³â++, 1¿ù·Î 
+						}//12ì›”ì´ ì§€ë‚˜ë©´ 1ë…„++, 1ì›”ë¡œ 
     					goto goto_loop_out;
     					break;
-    				case 80://¡éÅ¬¸¯ 
+    				case 80://â†“í´ë¦­ 
     					year-=1;
     					goto goto_loop_out;
     					break;
@@ -259,40 +256,40 @@ void calendar(){
 void load(){
 	int i = 0;
 	
-	fp = fopen("test.txt","a+");//read »óÅÂ·Î ÆÄÀÏ ¿­±â 
+	fp = fopen("test.txt","a+");//read ìƒíƒœë¡œ íŒŒì¼ ì—´ê¸° 
 	
-	if(fp == NULL){//a+ ÀĞ°í ¾²±â °¡´É || a = ¾²±â°¡´É 
-		printf("ÆÄÀÏÀÌ ¾ø½À´Ï´Ù.\n");
+	if(fp == NULL){//a+ ì½ê³  ì“°ê¸° ê°€ëŠ¥ || a = ì“°ê¸°ê°€ëŠ¥ 
+		printf("íŒŒì¼ì´ ì—†ìŠµë‹ˆë‹¤.\n");
 		exit(1);
-	}//ÆÄÀÏÀÌ ¾ø´ÂÁö È®ÀÎ 
+	}//íŒŒì¼ì´ ì—†ëŠ”ì§€ í™•ì¸ 
 	while(1){
 		if(feof(fp)){
 			break;
 		}
 		fscanf(fp, "%s %s %s %s %s\n",a[i].name, a[i].year, a[i].month, a[i].day, a[i].level);
 		i++;
-	}//ÆÄÀÏÀ» ³¡±îÁö ÀĞ¾î¿Â´Ù.
+	}//íŒŒì¼ì„ ëê¹Œì§€ ì½ì–´ì˜¨ë‹¤.
 	fclose(fp);
 }
 
-void EraseSpace(char a_string[]){//°ø¹éÁ¦°ÅÇÒ ¹è¿­ ¹Ş±â 
+void EraseSpace(char a_string[]){//ê³µë°±ì œê±°í•  ë°°ì—´ ë°›ê¸° 
 	int i, index = 0;
 	
-	for(i = 0; a_string[i] != 0; i++){//¹è¿­ÀÌ ³¡³¯¶§±îÁö ¹İº¹ 
-		if(a_string[i] != ' '){//i¹øÂ° ¹è¿­ÀÌ °ø¹éÀÌ¸é 
-			a_string[index] = a_string[i];//±×·¦ 
+	for(i = 0; a_string[i] != 0; i++){//ë°°ì—´ì´ ëë‚ ë•Œê¹Œì§€ ë°˜ë³µ 
+		if(a_string[i] != ' '){//ië²ˆì§¸ ë°°ì—´ì´ ê³µë°±ì´ë©´ 
+			a_string[index] = a_string[i];//ê·¸ë© 
 			index++;
 		}
 	}
 	a_string[index] = 0;
-}//°ø¹é Á¦°Å ÇÔ¼ö 
+}//ê³µë°± ì œê±° í•¨ìˆ˜ 
 
 void gotomain(char a[]){
 	if(atoi(a) == -1){
 		main(); 
 		exit(1);
 	}
-}//Å»ÃâÇÔ¼ö
+}//íƒˆì¶œí•¨ìˆ˜
 
 int reset_menu(int i){
 	if(i >= 16){
@@ -302,7 +299,7 @@ int reset_menu(int i){
 		fillmenu();
 	}
 	return i;
-}//ÀÔ·ÂÇÔ¼ö¿¡¼­ »ç¿ë(ui¿¡ ¸Â°Ô ¼öÁ¤°¡´É) 
+}//ì…ë ¥í•¨ìˆ˜ì—ì„œ ì‚¬ìš©(uiì— ë§ê²Œ ìˆ˜ì •ê°€ëŠ¥) 
 
 int check_str(char m_name[], char a_name[]){
 	int len,len1;
@@ -310,22 +307,22 @@ int check_str(char m_name[], char a_name[]){
 	int i, j;
 	
 	len = strlen(m_name);
-	len1 = strlen(a_name);//¹è¿­ ±æÀÌÀç±â 
+	len1 = strlen(a_name);//ë°°ì—´ ê¸¸ì´ì¬ê¸° 
 	
 	while(len+count <= len1){
-		j = 0;//j´Â °è¼ÓÇØ¼­ ÃÊ±âÈ­ 
+		j = 0;//jëŠ” ê³„ì†í•´ì„œ ì´ˆê¸°í™” 
 		for(i = 0; i < len; i++){
 			if(a_name[i] == m_name[i+count]){
 				j++;
-			}//¹è¿­ 1°³1°³ Ã¼Å©ÇØ¼­ °°Àº°Å ÀÖÀ¸¸é j++ 
+			}//ë°°ì—´ 1ê°œ1ê°œ ì²´í¬í•´ì„œ ê°™ì€ê±° ìˆìœ¼ë©´ j++ 
 		}
 		if(j == len){
 			return 1;
-		}//j°¡ ÀÔ·Â¹ŞÀº°Å¶û ±æÀÌ°¡ °°À¸¸é 1¹İÈ¯ 
+		}//jê°€ ì…ë ¥ë°›ì€ê±°ë‘ ê¸¸ì´ê°€ ê°™ìœ¼ë©´ 1ë°˜í™˜ 
 		count++;
 	}
-	return 0;//¾Æ´Ï¸é 0¹İÈ¯ 
-}//°Ë»öÇÔ¼ö¿¡¼­ »ç¿ë(1±ÛÀÚ·Î °Ë»öÇÏ±â) 
+	return 0;//ì•„ë‹ˆë©´ 0ë°˜í™˜ 
+}//ê²€ìƒ‰í•¨ìˆ˜ì—ì„œ ì‚¬ìš©(1ê¸€ìë¡œ ê²€ìƒ‰í•˜ê¸°) 
 
 void input(){
 	char s_name[SIZE];
@@ -333,7 +330,7 @@ void input(){
 	char s_month[SIZE];
 	char s_day[SIZE];
 	char s_level[SIZE];
-	int i = 9;//ÁÂÇ¥ ¶§¹®¿¡ ÇØ³õÀ½ 
+	int i = 9;//ì¢Œí‘œ ë•Œë¬¸ì— í•´ë†“ìŒ 
 
 	struct tm *t;
 	time_t timer;
@@ -349,41 +346,41 @@ void input(){
 	fillmenu();
 	
 	gotoxy(10,2);
-	printf("¾ÈÇÒ°Å¸é -1ÀÔ·ÂÇÏ¼¼¿ä\n");
+	printf("ì•ˆí• ê±°ë©´ -1ì…ë ¥í•˜ì„¸ìš”\n");
 	gotoxy(10,4);
-	printf("È°µ¿¸í ÀÔ·Â : ");
-	scanf(" %[^\n]s", s_name);//°ø¹é Æ÷ÇÔÇØ¼­ ¹Ş±â 
-	EraseSpace(s_name);//°ø¹éÁ¦°Å ÇÔ¼ö 
-	gotomain(s_name);//-1ÀÔ·Â½Ã mainÀ¸·Î º¸³»±â 
-	//°ø¹éÆ÷ÇÔÇØ¼­ ¹Ş¾Æ¼­ °ø¹éÁ¦°ÅÇØ¼­ ÀúÀå 
+	printf("í™œë™ëª… ì…ë ¥ : ");
+	scanf(" %[^\n]s", s_name);//ê³µë°± í¬í•¨í•´ì„œ ë°›ê¸° 
+	EraseSpace(s_name);//ê³µë°±ì œê±° í•¨ìˆ˜ 
+	gotomain(s_name);//-1ì…ë ¥ì‹œ mainìœ¼ë¡œ ë³´ë‚´ê¸° 
+	//ê³µë°±í¬í•¨í•´ì„œ ë°›ì•„ì„œ ê³µë°±ì œê±°í•´ì„œ ì €ì¥ 
 	
 	gotoxy(10,5);
-	printf("³âµµ ÀÔ·Â : ");
+	printf("ë…„ë„ ì…ë ¥ : ");
 	scanf(" %[^\n]s", s_year);
 	EraseSpace(s_year);
 	gotomain(s_year);
 		
 	gotoxy(10,6);
-	printf("¿ù ÀÔ·Â : ");
+	printf("ì›” ì…ë ¥ : ");
 	scanf(" %[^\n]s", s_month);
 	EraseSpace(s_month);
 	gotomain(s_month);
 	
 	gotoxy(10,7);
-	printf("ÀÏ ÀÔ·Â : ");
+	printf("ì¼ ì…ë ¥ : ");
 	scanf(" %[^\n]s", s_day);
 	EraseSpace(s_day);
 	gotomain(s_day);
 	
 	gotoxy(10,8);
-	printf("Áß¿äµµ ÀÔ·Â(1~5) : ");
-	scanf(" %[^\n]s", s_level);//±¸Á¶Ã¼ ¹è¿­¿¡ ÀÔ·Â 
+	printf("ì¤‘ìš”ë„ ì…ë ¥(1~5) : ");
+	scanf(" %[^\n]s", s_level);//êµ¬ì¡°ì²´ ë°°ì—´ì— ì…ë ¥ 
 	EraseSpace(s_level);
 	gotomain(s_level);
 	
-	while(atoi(s_year) == 0){//³âµµ¿¡ ÇÑ±Û ÀÔ·Â½Ã 
+	while(atoi(s_year) == 0){//ë…„ë„ì— í•œê¸€ ì…ë ¥ì‹œ 
 		gotoxy(10,i);
-		printf("³â ´Ù½ÃÀÔ·ÂÇÏ¼¼¿ä : ");
+		printf("ë…„ ë‹¤ì‹œì…ë ¥í•˜ì„¸ìš” : ");
 		scanf(" %[^\n]s",s_year);
 		EraseSpace(s_year);
 		gotomain(s_year);
@@ -391,19 +388,19 @@ void input(){
 		i = reset_menu(i);
 		i++;
 	}
-	while(atoi(s_month) == 0){//¿ù¿¡ ÇÑ±Û ÀÔ·Â½Ã 
+	while(atoi(s_month) == 0){//ì›”ì— í•œê¸€ ì…ë ¥ì‹œ 
 		gotoxy(10,i);
-		printf("¿ù ´Ù½ÃÀÔ·ÂÇÏ¼¼¿ä : ");
+		printf("ì›” ë‹¤ì‹œì…ë ¥í•˜ì„¸ìš” : ");
 		scanf(" %[^\n]s",s_month);
 		EraseSpace(s_month);
 		gotomain(s_month);
 		
-		i = reset_menu(i);//ÀÔ·Â¹Ş´Â ºÎºĞÀÌ ui¸¦ ³Ñ¾î°¡¸é ÃÊ±âÈ­ÇÑÈÄ ui ´Ù½ÃÇ¥Çö 
+		i = reset_menu(i);//ì…ë ¥ë°›ëŠ” ë¶€ë¶„ì´ uië¥¼ ë„˜ì–´ê°€ë©´ ì´ˆê¸°í™”í•œí›„ ui ë‹¤ì‹œí‘œí˜„ 
 		i++;
 	}
-	while(atoi(s_day) == 0){//ÀÏ¿¡ ÇÑ±Û ÀÔ·Â½Ã 
+	while(atoi(s_day) == 0){//ì¼ì— í•œê¸€ ì…ë ¥ì‹œ 
 		gotoxy(10,i);
-		printf("ÀÏ ´Ù½ÃÀÔ·ÂÇÏ¼¼¿ä : ");
+		printf("ì¼ ë‹¤ì‹œì…ë ¥í•˜ì„¸ìš” : ");
 		scanf(" %[^\n]s",s_day);
 		EraseSpace(s_day);
 		gotomain(s_day);
@@ -411,20 +408,20 @@ void input(){
 		i = reset_menu(i);
 		i++;
 	}
-	while(atoi(s_level) == 0){//Áß¿äµµ¿¡ ÇÑ±Û ÀÔ·Â½Ã 
+	while(atoi(s_level) == 0){//ì¤‘ìš”ë„ì— í•œê¸€ ì…ë ¥ì‹œ 
 		gotoxy(10,i);
-		printf("Áß¿äµµ ´Ù½ÃÀÔ·ÂÇÏ¼¼¿ä : ");
-		scanf(" %[^\n]s", s_level);//±¸Á¶Ã¼ ¹è¿­¿¡ ÀÔ·Â 
+		printf("ì¤‘ìš”ë„ ë‹¤ì‹œì…ë ¥í•˜ì„¸ìš” : ");
+		scanf(" %[^\n]s", s_level);//êµ¬ì¡°ì²´ ë°°ì—´ì— ì…ë ¥ 
 		EraseSpace(s_level);
 		gotomain(s_level);
 		
 		i = reset_menu(i);
 		i++;
-	}//»ç¿ëÀÚ°¡ ¼ıÀÚ¸¦ ÀÔ·ÂÇØ¾ß ÇÏ´Âµ¥ ¹®ÀÚ¸¦ ÀÔ·ÂÇÒ °æ¿ì 
+	}//ì‚¬ìš©ìê°€ ìˆ«ìë¥¼ ì…ë ¥í•´ì•¼ í•˜ëŠ”ë° ë¬¸ìë¥¼ ì…ë ¥í•  ê²½ìš° 
 	
-	while(atoi(s_year) < t->tm_year+1900 || atoi(s_year) > 3000){//¿ù¿¡ 1¿ù¹Ì¸¸ 12¿ù ÃÊ°ú·Î ÀÔ·Â½Ã 
+	while(atoi(s_year) < t->tm_year+1900 || atoi(s_year) > 3000){//ì›”ì— 1ì›”ë¯¸ë§Œ 12ì›” ì´ˆê³¼ë¡œ ì…ë ¥ì‹œ 
 		gotoxy(10,i); 
-		printf("³â ´Ù½ÃÀÔ·ÂÇÏ¼¼¿ä : ");
+		printf("ë…„ ë‹¤ì‹œì…ë ¥í•˜ì„¸ìš” : ");
 		scanf(" %[^\n]s",s_month);
 		EraseSpace(s_month);
 		gotomain(s_month);
@@ -433,22 +430,22 @@ void input(){
 		i++;
 	}
 	
-	while(atoi(s_month) < 1 || atoi(s_month) > 12){//¿ù¿¡ 1¿ù¹Ì¸¸ 12¿ù ÃÊ°ú·Î ÀÔ·Â½Ã 
+	while(atoi(s_month) < 1 || atoi(s_month) > 12){//ì›”ì— 1ì›”ë¯¸ë§Œ 12ì›” ì´ˆê³¼ë¡œ ì…ë ¥ì‹œ 
 		gotoxy(10,i);
-		printf("¿ù ´Ù½ÃÀÔ·ÂÇÏ¼¼¿ä : ");
+		printf("ì›” ë‹¤ì‹œì…ë ¥í•˜ì„¸ìš” : ");
 		scanf(" %[^\n]s",s_month);
 		EraseSpace(s_month);
 		gotomain(s_month);
 		
 		i = reset_menu(i);
 		i++;
-	}//¿ùÀÌ 1¿ù¹Ì¸¸ 12¿ù ÃÊ°ú·Î ÀÔ·ÂÇÒ °æ¿ì 
+	}//ì›”ì´ 1ì›”ë¯¸ë§Œ 12ì›” ì´ˆê³¼ë¡œ ì…ë ¥í•  ê²½ìš° 
 	
 	if(atoi(s_month) < 8){
-		if(atoi(s_month) %2 == 1){//È¦¼ö°¡ 31ÀÏ 
-			while(atoi(s_day) < 0 || atoi(s_day) > 31){//0ÀÏ ¹Ì¸¸ 31ÀÏ ÃÊ°ú½Ã 
+		if(atoi(s_month) %2 == 1){//í™€ìˆ˜ê°€ 31ì¼ 
+			while(atoi(s_day) < 0 || atoi(s_day) > 31){//0ì¼ ë¯¸ë§Œ 31ì¼ ì´ˆê³¼ì‹œ 
 				gotoxy(10,i);
-				printf("ÀÏ ´Ù½ÃÀÔ·ÂÇÏ¼¼¿ä : ");
+				printf("ì¼ ë‹¤ì‹œì…ë ¥í•˜ì„¸ìš” : ");
 				scanf(" %[^\n]s",s_day);
 				EraseSpace(s_day);
 				gotomain(s_day);
@@ -458,9 +455,9 @@ void input(){
 			}
 		}
 		else{
-			while(atoi(s_day) < 0 || atoi(s_day) > 30){//0ÀÏ ¹Ì¸¸ 30ÀÏ ÃÊ°ú½Ã 
+			while(atoi(s_day) < 0 || atoi(s_day) > 30){//0ì¼ ë¯¸ë§Œ 30ì¼ ì´ˆê³¼ì‹œ 
 				gotoxy(10,i);
-				printf("ÀÏ ´Ù½ÃÀÔ·ÂÇÏ¼¼¿ä : ");
+				printf("ì¼ ë‹¤ì‹œì…ë ¥í•˜ì„¸ìš” : ");
 				scanf(" %[^\n]s",s_day);
 				EraseSpace(s_day);
 				gotomain(s_day);
@@ -469,12 +466,12 @@ void input(){
 				i++;
 			}
 		}
-	}//7¿ùÀÌÇÏ ÀÎ½Ä 
+	}//7ì›”ì´í•˜ ì¸ì‹ 
 	else{
-		if(atoi(s_month) %2 == 0){//Â¦¼ö°¡ 31ÀÏ 
-			while(atoi(s_day) < 0 || atoi(s_day) > 31){//0ÀÏ ¹Ì¸¸ 31ÀÏ ÃÊ°ú½Ã 
+		if(atoi(s_month) %2 == 0){//ì§ìˆ˜ê°€ 31ì¼ 
+			while(atoi(s_day) < 0 || atoi(s_day) > 31){//0ì¼ ë¯¸ë§Œ 31ì¼ ì´ˆê³¼ì‹œ 
 				gotoxy(10,i);
-				printf("ÀÏ ´Ù½ÃÀÔ·ÂÇÏ¼¼¿ä : ");
+				printf("ì¼ ë‹¤ì‹œì…ë ¥í•˜ì„¸ìš” : ");
 				scanf(" %[^\n]s",s_day);
 				EraseSpace(s_day);
 				gotomain(s_day);
@@ -484,9 +481,9 @@ void input(){
 			}
 		}
 		else{
-			while(atoi(s_day) < 0 || atoi(s_day) > 30){//0ÀÏ ¹Ì¸¸ 30ÀÏ ÃÊ°ú½Ã 
+			while(atoi(s_day) < 0 || atoi(s_day) > 30){//0ì¼ ë¯¸ë§Œ 30ì¼ ì´ˆê³¼ì‹œ 
 				gotoxy(10,i);
-				printf("ÀÏ ´Ù½ÃÀÔ·ÂÇÏ¼¼¿ä : ");
+				printf("ì¼ ë‹¤ì‹œì…ë ¥í•˜ì„¸ìš” : ");
 				scanf(" %[^\n]s",s_day);
 				EraseSpace(s_day);
 				gotomain(s_day);
@@ -495,41 +492,41 @@ void input(){
 				i++;
 			}
 		}
-	}//7¿ù ÀÌ»ó ÀÎ½Ä 
+	}//7ì›” ì´ìƒ ì¸ì‹ 
 	
-	while(atoi(s_level) < 1 || atoi(s_level) > 5){//Áß¿äµµ¸¦ 1¹Ì¸¸ 5ÃÊ°ú ÀÔ·Â½Ã 
+	while(atoi(s_level) < 1 || atoi(s_level) > 5){//ì¤‘ìš”ë„ë¥¼ 1ë¯¸ë§Œ 5ì´ˆê³¼ ì…ë ¥ì‹œ 
 		gotoxy(10,i);
-		printf("Áß¿äµµ ´Ù½Ã ÀÔ·ÂÇÏ¼¼¿ä : ");
+		printf("ì¤‘ìš”ë„ ë‹¤ì‹œ ì…ë ¥í•˜ì„¸ìš” : ");
 		scanf(" %[^\n]s", s_level);
 		EraseSpace(s_level);
 		gotomain(s_level);
 		
 		i = reset_menu(i);
 		i++;
-	}//Áß¿äµµ°¡ 1¹Ì¸¸ 5ÃÊ°úÀÌ¸é ´Ù½ÃÀÔ·Â 
+	}//ì¤‘ìš”ë„ê°€ 1ë¯¸ë§Œ 5ì´ˆê³¼ì´ë©´ ë‹¤ì‹œì…ë ¥ 
 	
-	while((isyoon(atoi(s_year)) && atoi(s_month) == 2 && atoi(s_day) > 29)){//À±³âÀÌ°í 2¿ùÀÎµ¥ 28ÀÏÀÌ»óÀ¸·Î ÀÔ·ÂÇÒ½Ã 
+	while((isyoon(atoi(s_year)) && atoi(s_month) == 2 && atoi(s_day) > 29)){//ìœ¤ë…„ì´ê³  2ì›”ì¸ë° 28ì¼ì´ìƒìœ¼ë¡œ ì…ë ¥í• ì‹œ 
 		gotoxy(10,i);
-		printf("À±³âÀÔ´Ï´Ù.\n");
-		printf("ÀÏ ´Ù½ÃÀÔ·ÂÇÏ¼¼¿ä.");
+		printf("ìœ¤ë…„ì…ë‹ˆë‹¤.\n");
+		printf("ì¼ ë‹¤ì‹œì…ë ¥í•˜ì„¸ìš”.");
 		scanf(" %[^\n]s",s_day);
 		EraseSpace(s_day);
 		gotomain(s_day);
 		
 		i = reset_menu(i);
 		i++;
-	}//À±³âÀÏ¶§ 2¿ù 29ÀÏÀÌ¸é ´Ù½ÃÀÔ·Â 
+	}//ìœ¤ë…„ì¼ë•Œ 2ì›” 29ì¼ì´ë©´ ë‹¤ì‹œì…ë ¥ 
 	
-	fp = fopen("test.txt","a");//±¸Á¶Ã¼ ¹è¿­¿¡ ÀÔ·Â¹ŞÀº°É ÆÄÀÏ¿¡ ÀÔ·ÂÇÏ±â À§ÇØ append·Î ¿ÀÇÂ 
-	fprintf(fp, "%s %s %s %s %s\n", s_name, s_year, s_month, s_day, s_level);//ÆÄÀÏ¿¡ ÀÔ·Â 
-	fclose(fp);//¿­¾úÀ¸´Ï ´İ±â
+	fp = fopen("test.txt","a");//êµ¬ì¡°ì²´ ë°°ì—´ì— ì…ë ¥ë°›ì€ê±¸ íŒŒì¼ì— ì…ë ¥í•˜ê¸° ìœ„í•´ appendë¡œ ì˜¤í”ˆ 
+	fprintf(fp, "%s %s %s %s %s\n", s_name, s_year, s_month, s_day, s_level);//íŒŒì¼ì— ì…ë ¥ 
+	fclose(fp);//ì—´ì—ˆìœ¼ë‹ˆ ë‹«ê¸°
 
 	gotoxy(10,i+1);
-	printf("ÀÔ·Â ¿Ï·á\n");
+	printf("ì…ë ¥ ì™„ë£Œ\n");
 	getchar();
 	getchar();
-	main();//¸ŞÀÎÀ¸·Î ÄÄ¹é 
-}//ÀÔ·Â 
+	main();//ë©”ì¸ìœ¼ë¡œ ì»´ë°± 
+}//ì…ë ¥ 
 
 void modify(){	
 	char f_name[20];
@@ -551,10 +548,10 @@ void modify(){
 	fillmenu();
 	
 	gotoxy(7,2);
-	printf("¾ÈÇÒ°Å¸é -1ÀÔ·ÂÇÏ¼¼¿ä\n");
+	printf("ì•ˆí• ê±°ë©´ -1ì…ë ¥í•˜ì„¸ìš”\n");
 	
 	gotoxy(7,3);
-	printf("¼öÁ¤ÇÒ È°µ¿¸íÀ» ÀÔ·ÂÇÏ½Ã¿À :");
+	printf("ìˆ˜ì •í•  í™œë™ëª…ì„ ì…ë ¥í•˜ì‹œì˜¤ :");
 	scanf(" %[^\n]s",f_name);
 	EraseSpace(f_name);
 	gotomain(f_name);
@@ -565,33 +562,33 @@ void modify(){
 			gotoxy(7,5);
 			printf("1. %s\n", a[i].name);
 			gotoxy(7,6);
-			printf("2. %s³â-%s¿ù-%sÀÏ\n", a[i].year,a[i].month,a[i].day);
+			printf("2. %së…„-%sì›”-%sì¼\n", a[i].year,a[i].month,a[i].day);
 			num = atoi(a[i].level);
 			gotoxy(7,7);
 			if(num == 0){
 				printf("clear\n");
 			}
 			else{
-				printf("Áß¿äµµ : ");
+				printf("ì¤‘ìš”ë„ : ");
 				for(j = 0; j < num; j++){
-					printf("¡Ú");
+					printf("â˜…");
 				}
 				printf("\n");
 			}
 			break;
 		}
-	}//±¸Á¶Ã¼ÀÇ Å©±â¸¸Å­ ¹İº¹ÇØ¼­ Ã¼Å©
+	}//êµ¬ì¡°ì²´ì˜ í¬ê¸°ë§Œí¼ ë°˜ë³µí•´ì„œ ì²´í¬
 	
 	if(i != LSIZE){
 		gotoxy(7,9);
-		printf("¼öÁ¤ÇÒ ¸ñ·ÏÀ» ÀÔ·ÂÇÏ¼¼¿ä.");
+		printf("ìˆ˜ì •í•  ëª©ë¡ì„ ì…ë ¥í•˜ì„¸ìš”.");
 		gotoxy(7,10);
-		printf("(1. È°µ¿¸í, 2. ³â, 3. ¿ù, 4. ÀÏ, 5. Áß¿äµµ)");
+		printf("(1. í™œë™ëª…, 2. ë…„, 3. ì›”, 4. ì¼, 5. ì¤‘ìš”ë„)");
 		scanf("%d", &sel);
 		switch(sel){
 			case 1:
 				gotoxy(7,12);
-				printf("¹Ù²Ü È°µ¿¸í ÀÔ·Â : ");
+				printf("ë°”ê¿€ í™œë™ëª… ì…ë ¥ : ");
 				scanf(" %[^\n]s", m_name);
 				EraseSpace(m_name);	
 				gotomain(m_name);
@@ -599,7 +596,7 @@ void modify(){
 				break;
 			case 2:
 				gotoxy(7,12);
-				printf("¹Ù²Ü ³âµµ ÀÔ·Â : ");
+				printf("ë°”ê¿€ ë…„ë„ ì…ë ¥ : ");
 				scanf(" %[^\n]s", m_year);
 				EraseSpace(m_year);
 				gotomain(m_year);
@@ -607,7 +604,7 @@ void modify(){
 				break;
 			case 3:
 				gotoxy(7,12);
-				printf("¹Ù²Ü ¿ù ÀÔ·Â : ");
+				printf("ë°”ê¿€ ì›” ì…ë ¥ : ");
 				scanf(" %[^\n]s", m_month);
 				EraseSpace(m_month);
 				gotomain(m_month);
@@ -615,7 +612,7 @@ void modify(){
 				break;
 			case 4:
 				gotoxy(7,12);
-				printf("¹Ù²Ü ÀÏ ÀÔ·Â : ");
+				printf("ë°”ê¿€ ì¼ ì…ë ¥ : ");
 				scanf(" %[^\n]s", m_day);
 				EraseSpace(m_day);
 				gotomain(m_day);
@@ -623,7 +620,7 @@ void modify(){
 				break;
 			case 5:
 				gotoxy(7,12);
-				printf("¹Ù²Ü Áß¿äµµ ÀÔ·Â : ");
+				printf("ë°”ê¿€ ì¤‘ìš”ë„ ì…ë ¥ : ");
 				scanf(" %[^\n]s", m_level);
 				EraseSpace(m_level);
 				gotomain(m_level);
@@ -634,20 +631,20 @@ void modify(){
 				main();
 				break;				
 		}
-	}//¼öÁ¤ÇÒ ºÎºĞ ¼±ÅÃ 1~3 4¹øÀº ±×³É Á¾·á 
+	}//ìˆ˜ì •í•  ë¶€ë¶„ ì„ íƒ 1~3 4ë²ˆì€ ê·¸ëƒ¥ ì¢…ë£Œ 
 	
 	fp = fopen("test.txt","w");
 	for(i = 0; i < LSIZE; i++){
 		fprintf(fp, "%s %s %s %s %s\n", a[i].name, a[i].year, a[i].month, a[i].day, a[i].level);
-	}//¼öÁ¤ÇÑ ºÎºĞÀ» °íÃÄ¼­ ÆÄÀÏ¿¡ ÀÔ·Â 
+	}//ìˆ˜ì •í•œ ë¶€ë¶„ì„ ê³ ì³ì„œ íŒŒì¼ì— ì…ë ¥ 
 	fclose(fp);
 	
 	gotoxy(7,13);
-	printf("¼öÁ¤¿Ï·á");
+	printf("ìˆ˜ì •ì™„ë£Œ");
 	getchar();
 	getchar();
 	main();
-}//¼öÁ¤ 
+}//ìˆ˜ì • 
 
 void find(){
 	char m_name[SIZE];
@@ -668,17 +665,17 @@ void find(){
 	fillmenu();
 	
 	gotoxy(7,2);
-	printf("¾ÈÇÒ°Å¸é -1ÀÔ·ÂÇÏ¼¼¿ä\n");
+	printf("ì•ˆí• ê±°ë©´ -1ì…ë ¥í•˜ì„¸ìš”\n");
 	if(i != LSIZE){
 		gotoxy(7,4);
-		printf("°Ë»öÇÒ ¸ñ·ÏÀ» ÀÔ·ÂÇÏ¼¼¿ä.");
+		printf("ê²€ìƒ‰í•  ëª©ë¡ì„ ì…ë ¥í•˜ì„¸ìš”.");
 		gotoxy(7,5);
-		printf("(1. È°µ¿¸í, 2. ³â, 3. ¿ù, 4. ÀÏ, 5. Áß¿äµµ)");
+		printf("(1. í™œë™ëª…, 2. ë…„, 3. ì›”, 4. ì¼, 5. ì¤‘ìš”ë„)");
 		scanf("%d",&sel);
 		switch(sel){
 			case 1:
 				gotoxy(7,7);
-				printf("°Ë»öÇÒ È°µ¿¸í ÀÔ·Â : ");
+				printf("ê²€ìƒ‰í•  í™œë™ëª… ì…ë ¥ : ");
 				scanf(" %[^\n]s", m_name);
 				EraseSpace(m_name);
 				gotomain(m_name);
@@ -687,18 +684,18 @@ void find(){
 					if(check == 1){
 						gotoxy(7,9);
 						printf("%d. ",i+1);
-						printf("È°µ¿¸í : %s\n",a[i].name);
+						printf("í™œë™ëª… : %s\n",a[i].name);
 						gotoxy(10,10);
-						printf("ÀÏÀÚ : %s³â - %s¿ù - %sÀÏ\n", a[i].year, a[i].month, a[i].day);
+						printf("ì¼ì : %së…„ - %sì›” - %sì¼\n", a[i].year, a[i].month, a[i].day);
 						num = atoi(a[i].level);
 						gotoxy(10,11);
 						if(num == 0){
 							printf("clear\n");
 						}
 						else{
-							printf("Áß¿äµµ : ");
+							printf("ì¤‘ìš”ë„ : ");
 							for(j = 0; j < num; j++){
-								printf("¡Ú");
+								printf("â˜…");
 							}
 							printf("\n");
 						}
@@ -707,7 +704,7 @@ void find(){
 				break;
 			case 2:
 				gotoxy(7,7);
-				printf("°Ë»öÇÒ ³âµµ ÀÔ·Â : ");
+				printf("ê²€ìƒ‰í•  ë…„ë„ ì…ë ¥ : ");
 				scanf(" %[^\n]s", m_year);
 				EraseSpace(m_year);
 				gotomain(m_year);
@@ -715,18 +712,18 @@ void find(){
 					if(strcmp(m_year, a[i].year) == 0){
 						gotoxy(7,9);
 						printf("%d. ",i+1);
-						printf("È°µ¿¸í : %s\n",a[i].name);
+						printf("í™œë™ëª… : %s\n",a[i].name);
 						gotoxy(10,10);
-						printf("ÀÏÀÚ : %s³â - %s¿ù - %sÀÏ\n", a[i].year, a[i].month, a[i].day);
+						printf("ì¼ì : %së…„ - %sì›” - %sì¼\n", a[i].year, a[i].month, a[i].day);
 						num = atoi(a[i].level);
 						gotoxy(10,11);
 						if(num == 0){
 							printf("clear\n");
 						}
 						else{
-							printf("Áß¿äµµ : ");
+							printf("ì¤‘ìš”ë„ : ");
 							for(j = 0; j < num; j++){
-								printf("¡Ú");
+								printf("â˜…");
 							}
 							printf("\n");
 						}
@@ -735,7 +732,7 @@ void find(){
 				break;
 			case 3:
 				gotoxy(7,7);
-				printf("°Ë»öÇÒ ¿ù ÀÔ·Â : ");
+				printf("ê²€ìƒ‰í•  ì›” ì…ë ¥ : ");
 				scanf(" %[^\n]s", m_month);
 				EraseSpace(m_month);	
 				gotomain(m_month);
@@ -743,18 +740,18 @@ void find(){
 					if(strcmp(m_month, a[i].month) == 0){
 						gotoxy(7,9);
 						printf("%d. ",i+1);
-						printf("È°µ¿¸í : %s\n",a[i].name);
+						printf("í™œë™ëª… : %s\n",a[i].name);
 						gotoxy(10,10);
-						printf("ÀÏÀÚ : %s³â - %s¿ù - %sÀÏ\n", a[i].year, a[i].month, a[i].day);
+						printf("ì¼ì : %së…„ - %sì›” - %sì¼\n", a[i].year, a[i].month, a[i].day);
 						num = atoi(a[i].level);
 						gotoxy(10,11);
 						if(num == 0){
 							printf("clear\n");
 						}
 						else{
-							printf("Áß¿äµµ : ");
+							printf("ì¤‘ìš”ë„ : ");
 							for(j = 0; j < num; j++){
-								printf("¡Ú");
+								printf("â˜…");
 							}
 							printf("\n");
 						}
@@ -763,7 +760,7 @@ void find(){
 				break;
 			case 4:
 				gotoxy(7,7);
-				printf("°Ë»öÇÒ ÀÏ ÀÔ·Â : ");
+				printf("ê²€ìƒ‰í•  ì¼ ì…ë ¥ : ");
 				scanf(" %[^\n]s", m_day);
 				EraseSpace(m_day);	
 				gotomain(m_day);
@@ -771,18 +768,18 @@ void find(){
 					if(strcmp(m_day, a[i].day) == 0){
 						gotoxy(7,9);
 						printf("%d. ",i+1);
-						printf("È°µ¿¸í : %s\n",a[i].name);
+						printf("í™œë™ëª… : %s\n",a[i].name);
 						gotoxy(10,10);
-						printf("ÀÏÀÚ : %s³â - %s¿ù - %sÀÏ\n", a[i].year, a[i].month, a[i].day);
+						printf("ì¼ì : %së…„ - %sì›” - %sì¼\n", a[i].year, a[i].month, a[i].day);
 						num = atoi(a[i].level);
 						gotoxy(10,11);
 						if(num == 0){
 							printf("clear\n");
 						}
 						else{
-							printf("Áß¿äµµ : ");
+							printf("ì¤‘ìš”ë„ : ");
 							for(j = 0; j < num; j++){
-								printf("¡Ú");
+								printf("â˜…");
 							}
 							printf("\n");
 						}
@@ -791,7 +788,7 @@ void find(){
 				break;
 			case 5 :
 				gotoxy(7,7);
-				printf("°Ë»öÇÒ Áß¿äµµ ÀÔ·Â : ");
+				printf("ê²€ìƒ‰í•  ì¤‘ìš”ë„ ì…ë ¥ : ");
 				scanf(" %[^\n]s",m_level);
 				EraseSpace(m_level);	
 				gotomain(m_level);
@@ -799,18 +796,18 @@ void find(){
 					if(strcmp(m_level, a[i].level) == 0){
 						gotoxy(7,9);
 						printf("%d. ",i+1);
-						printf("È°µ¿¸í : %s\n",a[i].name);
+						printf("í™œë™ëª… : %s\n",a[i].name);
 						gotoxy(10,10);
-						printf("ÀÏÀÚ : %s³â - %s¿ù - %sÀÏ\n", a[i].year, a[i].month, a[i].day);
+						printf("ì¼ì : %së…„ - %sì›” - %sì¼\n", a[i].year, a[i].month, a[i].day);
 						num = atoi(a[i].level);
 						gotoxy(10,11);
 						if(num == 0){
 							printf("clear\n");
 						}
 						else{
-							printf("Áß¿äµµ : ");
+							printf("ì¤‘ìš”ë„ : ");
 							for(j = 0; j < num; j++){
-								printf("¡Ú");
+								printf("â˜…");
 							}
 							printf("\n");
 						}
@@ -826,13 +823,13 @@ void find(){
 	fclose(fp);
 	
 	gotoxy(7,13);
-	printf("°Ë»ö¿Ï·á");
+	printf("ê²€ìƒ‰ì™„ë£Œ");
 	
-	//±¸Á¶Ã¼ÀÇ Å©±â¸¸Å­ ¹İº¹ÇØ¼­ Ã¼Å©
+	//êµ¬ì¡°ì²´ì˜ í¬ê¸°ë§Œí¼ ë°˜ë³µí•´ì„œ ì²´í¬
 	getchar();
 	getchar();
 	main();
-}//°Ë»ö 
+}//ê²€ìƒ‰ 
 
 void delete1(){
 	int i;
@@ -846,10 +843,10 @@ void delete1(){
 	fillmenu();
 	
 	gotoxy(7,2);
-	printf("¾ÈÇÒ°Å¸é -1ÀÔ·ÂÇÏ¼¼¿ä\n");
+	printf("ì•ˆí• ê±°ë©´ -1ì…ë ¥í•˜ì„¸ìš”\n");
 	
 	gotoxy(7,4);
-	printf("»èÁ¦ÇÒ È°µ¿¸íÀ» ÀÔ·ÂÇÏ½Ã¿À : ");
+	printf("ì‚­ì œí•  í™œë™ëª…ì„ ì…ë ¥í•˜ì‹œì˜¤ : ");
 	gotoxy(7,5);
 	scanf(" %[^\n]s",f_name);
 	EraseSpace(f_name);	
@@ -859,17 +856,17 @@ void delete1(){
 		if(strcmp(f_name, a[i].name) == 0){
 			strcpy(a[i].name," ");
 			gotoxy(7,7);
-			printf("»èÁ¦¿Ï·á");
+			printf("ì‚­ì œì™„ë£Œ");
 			break;
 		}
-	}	//±¸Á¶Ã¼ÀÇ Å©±â¸¸Å­ ¹İº¹ÇØ¼­ Ã¼Å©
+	}	//êµ¬ì¡°ì²´ì˜ í¬ê¸°ë§Œí¼ ë°˜ë³µí•´ì„œ ì²´í¬
 	
 	if( i == LSIZE){
 		gotoxy(7,6);
-		printf("ÀÏÄ¡ÇÏ´Â È°µ¿ÀÌ ¾ø½À´Ï´Ù.");
-	}//0ºÎÅÍ 99±îÁö µ¹·ÈÀ»½Ã ÀÏÄ¡ÇÏ´Â »ç¶÷ÀÌ ¾øÀ¸¸é Ãâ·Â 
+		printf("ì¼ì¹˜í•˜ëŠ” í™œë™ì´ ì—†ìŠµë‹ˆë‹¤.");
+	}//0ë¶€í„° 99ê¹Œì§€ ëŒë ¸ì„ì‹œ ì¼ì¹˜í•˜ëŠ” ì‚¬ëŒì´ ì—†ìœ¼ë©´ ì¶œë ¥ 
 	
-	fp = fopen("test.txt","w");//¼öÁ¤ÇÏ±â À§ÇØ w·Î ÀĞ¾î¿À±â 
+	fp = fopen("test.txt","w");//ìˆ˜ì •í•˜ê¸° ìœ„í•´ wë¡œ ì½ì–´ì˜¤ê¸° 
 	for(i = 0; i < LSIZE; i++){
 		if(strcmp(a[i].name, " ") != 0){
 			fprintf(fp, "%s %s %s %s %s\n", a[i].name, a[i].year, a[i].month, a[i].day, a[i].level);
@@ -880,7 +877,7 @@ void delete1(){
 	getchar(); 
 	getchar();
 	main();
-}//»èÁ¦ 
+}//ì‚­ì œ 
 
 void all_print(){
 	int i,j,num;
@@ -894,13 +891,13 @@ void all_print(){
 	fillmenu();
 	
 	gotoxy(7,6);
-	printf("¸î³âÀÇ ÀÏÁ¤À» Ãâ·ÂÇÏ½Ã°Ú½À´Ï±î?");
+	printf("ëª‡ë…„ì˜ ì¼ì •ì„ ì¶œë ¥í•˜ì‹œê² ìŠµë‹ˆê¹Œ?");
 	scanf(" %[^\n]s",sel);
 	EraseSpace(sel);
 	gotomain(sel);
 	
 	gotoxy(7,8);
-	printf("¸î¿ùÀÇ ÀÏÁ¤À» Ãâ·ÂÇÏ½Ã°Ú½À´Ï±î?");
+	printf("ëª‡ì›”ì˜ ì¼ì •ì„ ì¶œë ¥í•˜ì‹œê² ìŠµë‹ˆê¹Œ?");
 	scanf(" %[^\n]s",sel1);
 	EraseSpace(sel1);
 	gotomain(sel1);
@@ -916,16 +913,16 @@ void all_print(){
 				i++;
 			}
 			if(strlen(a[i].name) != 0 && strcmp(a[i].name, " ") != 0){
-				printf("È°µ¿¸í : %s\n",a[i].name);
-				printf("%s³â-%s¿ù-%sÀÏ\n",a[i].year,a[i].month,a[i].day);
+				printf("í™œë™ëª… : %s\n",a[i].name);
+				printf("%së…„-%sì›”-%sì¼\n",a[i].year,a[i].month,a[i].day);
 				num = atoi(a[i].level);
 				if(num == 0){
 					printf("clear\n");
 				}
 				else{
-					printf("Áß¿äµµ : ");
+					printf("ì¤‘ìš”ë„ : ");
 					for(j = 0; j < num; j++){
-						printf("¡Ú");
+						printf("â˜…");
 					}
 					printf("\n");
 				}
@@ -934,7 +931,7 @@ void all_print(){
 		}
 	}
 	if(i == LSIZE){
-		printf("´õÀÌ»ó ¾ø½À´Ï´Ù.");
+		printf("ë”ì´ìƒ ì—†ìŠµë‹ˆë‹¤.");
 	}
 	fclose(fp);
 	
@@ -951,22 +948,22 @@ void check_OX(){
 	
 	all_print();
 	
-	printf("¾ÈÇÒ°Å¸é -1ÀÔ·ÂÇÏ¼¼¿ä\n");
-	printf("checkÇÒ È°µ¿¸íÀ» ÀÔ·ÂÇÏ½Ã¿À : ");
+	printf("ì•ˆí• ê±°ë©´ -1ì…ë ¥í•˜ì„¸ìš”\n");
+	printf("checkí•  í™œë™ëª…ì„ ì…ë ¥í•˜ì‹œì˜¤ : ");
 	scanf(" %[^\n]s",&c_name);
 	EraseSpace(c_name);
-	gotomain(c_name);//-1ÀÔ·ÂÇÏ¸é main¹®À¸·Î Å»Ãâ 
+	gotomain(c_name);//-1ì…ë ¥í•˜ë©´ mainë¬¸ìœ¼ë¡œ íƒˆì¶œ 
 	
 	for(i = 0; i < LSIZE; i++){
 		if(strcmp(a[i].name,c_name) == 0 && strcmp(a[i].level, "0") == 0){
-			printf("ÀÌ¹Ì Å¬¸®¾îÇß½À´Ï´Ù.");
+			printf("ì´ë¯¸ í´ë¦¬ì–´í–ˆìŠµë‹ˆë‹¤.");
 		}
 		if(strcmp(c_name, a[i].name) == 0){
 			strcpy(a[i].level,"0");	
 		} 
 	}
 	
-	fp = fopen("test.txt","w");//¼öÁ¤ÇÏ±â À§ÇØ w·Î ÀĞ¾î¿À±â 
+	fp = fopen("test.txt","w");//ìˆ˜ì •í•˜ê¸° ìœ„í•´ wë¡œ ì½ì–´ì˜¤ê¸° 
 	for(i = 0; i < LSIZE; i++){
 		fprintf(fp, "%s %s %s %s %s\n", a[i].name, a[i].year, a[i].month, a[i].day, a[i].level);
 	}
@@ -995,25 +992,25 @@ void check_percent(){
 	fp = fopen("test.txt","r");
 	
 	gotoxy(7,6);
-	printf("¸î³âÀÇ ÀÏÁ¤À» Ãâ·ÂÇÏ½Ã°Ú½À´Ï±î?");
+	printf("ëª‡ë…„ì˜ ì¼ì •ì„ ì¶œë ¥í•˜ì‹œê² ìŠµë‹ˆê¹Œ?");
 	scanf(" %[^\n]s",sel);
 	EraseSpace(sel);
 	gotomain(sel);
 	
 	gotoxy(7,8);
-	printf("¸î¿ùÀÇ ÀÏÁ¤À» Ãâ·ÂÇÏ½Ã°Ú½À´Ï±î?");
+	printf("ëª‡ì›”ì˜ ì¼ì •ì„ ì¶œë ¥í•˜ì‹œê² ìŠµë‹ˆê¹Œ?");
 	scanf(" %[^\n]s",sel1);
 	EraseSpace(sel1);
 	gotomain(sel1);
 	
 	for(i = 0; i < LSIZE; i++){
 		fscanf(fp, "%s %s %s %s %s",a[i].name, a[i].year, a[i].month, a[i].day, a[i].level);
-		}	//ÆÄÀÏ ÀĞ¾î¿À±â 
+		}	//íŒŒì¼ ì½ì–´ì˜¤ê¸° 
 		for(i = 0; i < LSIZE; i++){
 		if(strcmp(a[i].year,sel) == 0 && strcmp(a[i].month,sel1) == 0){
 			if(strlen(a[i].name) != 0 && strcmp(a[i].name, a[i-1].name) == 0){
 				i++;
-			}//±æÀÌ°¡ 0ÀÌ°í Àü¿¡²¨¶û °°À¸¸é i++ 
+			}//ê¸¸ì´ê°€ 0ì´ê³  ì „ì—êº¼ë‘ ê°™ìœ¼ë©´ i++ 
 			
 			system("cls");
 			
@@ -1022,28 +1019,28 @@ void check_percent(){
 			
 			if(strlen(a[i].name) != 0 && strcmp(a[i].name, " ") != 0){
 				if(strcmp(a[i].level,"0") == 0){
-					per++;//Å¬¸®¾î ÇßÀ¸¸é per++ 
+					per++;//í´ë¦¬ì–´ í–ˆìœ¼ë©´ per++ 
 				}
 				else{
-					per1++;//Å¬¸®¾î ¾ÈÇßÀ¸¸é per1++; 
+					per1++;//í´ë¦¬ì–´ ì•ˆí–ˆìœ¼ë©´ per1++; 
 				}
-			}//ÀÔ·ÂµÈ °Íµé¸¸ Ãâ·Â 
+			}//ì…ë ¥ëœ ê²ƒë“¤ë§Œ ì¶œë ¥ 
 		}
 	}
 	fclose(fp);
 	
 	if(per == 0 ){
 		gotoxy(7,8);
-		printf("Å¬¸®¾îÇÑ ÀÏÁ¤ÀÌ ¾ø½À´Ï´Ù.");
+		printf("í´ë¦¬ì–´í•œ ì¼ì •ì´ ì—†ìŠµë‹ˆë‹¤.");
 	}
 	else{
 		sum = per + per1;
-		result = (per/sum) * 100;//ÆÛ¼¾Æ® °è»ê½Ä 
+		result = (per/sum) * 100;//í¼ì„¼íŠ¸ ê³„ì‚°ì‹ 
 		
 		gotoxy(7,5);
-		printf("%d°³Áß %d°³ ¿Ï·áÇß½À´Ï´Ù.\n",(int)sum,per);
+		printf("%dê°œì¤‘ %dê°œ ì™„ë£Œí–ˆìŠµë‹ˆë‹¤.\n",(int)sum,per);
 		gotoxy(7,7);
-		printf("%s³â %s¿ù¿¡ Å¬¸®¾îÇÑ ÆÛ¼¾Æ®´Â %d%%ÀÔ´Ï´Ù.",sel,sel1,result);//%%ÇÒ½Ã %Ãâ·Â 
+		printf("%së…„ %sì›”ì— í´ë¦¬ì–´í•œ í¼ì„¼íŠ¸ëŠ” %d%%ì…ë‹ˆë‹¤.",sel,sel1,result);//%%í• ì‹œ %ì¶œë ¥ 
 		//printf("clear percent : %d",result);	
 	} 
 	getchar();
@@ -1054,25 +1051,25 @@ void check_percent(){
 void timeprint(){
 	struct tm *t;
 	time_t timer;
-	char str[2][20] = {"¿ÀÀü","¿ÀÈÄ"};
+	char str[2][20] = {"ì˜¤ì „","ì˜¤í›„"};
 
 	system("cls");
 	
 	timer = time(NULL);
 	t = localtime(&timer);
 	
-	if(t->tm_hour > 12){//12½Ã ÀÌ»óÀÌ¸é ¿ÀÈÄ 
+	if(t->tm_hour > 12){//12ì‹œ ì´ìƒì´ë©´ ì˜¤í›„ 
 		t->tm_hour = t->tm_hour-12; 
-		printf("¡ÚÇöÀç½Ã°£Àº %d³â %d¿ù %dÀÏ %s %d½Ã %dºĞ ÀÔ´Ï´Ù.¡Ú\n\n",t->tm_year+1900, t->tm_mon+1, t->tm_mday, str[1], t->tm_hour, t->tm_min);
+		printf("â˜…í˜„ì¬ì‹œê°„ì€ %dë…„ %dì›” %dì¼ %s %dì‹œ %dë¶„ ì…ë‹ˆë‹¤.â˜…\n\n",t->tm_year+1900, t->tm_mon+1, t->tm_mday, str[1], t->tm_hour, t->tm_min);
 	}
-	else{//¾Æ´Ï¸é ¿ÀÀü 
-		printf("¡ÚÇöÀç½Ã°£Àº %d³â %d¿ù %dÀÏ %s %d½Ã %dºĞ ÀÔ´Ï´Ù.¡Ú\n\n",t->tm_year+1900, t->tm_mon+1, t->tm_mday, str[0], t->tm_hour, t->tm_min);
+	else{//ì•„ë‹ˆë©´ ì˜¤ì „ 
+		printf("â˜…í˜„ì¬ì‹œê°„ì€ %dë…„ %dì›” %dì¼ %s %dì‹œ %dë¶„ ì…ë‹ˆë‹¤.â˜…\n\n",t->tm_year+1900, t->tm_mon+1, t->tm_mday, str[0], t->tm_hour, t->tm_min);
 	}
-}//ÇöÀç½Ã°£ Ãâ·Â 
+}//í˜„ì¬ì‹œê°„ ì¶œë ¥ 
 
 void print_menu(){
 	int i, j = 0;
-	char str[3][10] = {"ÀÏÁ¤±â´É","ºÎ°¡±â´É","Á¾·á"};
+	char str[3][10] = {"ì¼ì •ê¸°ëŠ¥","ë¶€ê°€ê¸°ëŠ¥","ì¢…ë£Œ"};
 	
 	for(i = 1; i < 6; i+=2){
 		gotoxy(18,6+i);
@@ -1085,7 +1082,7 @@ void print_menu(){
 }
 void print_menu1(){
 	int i, j = 0;
-	char str[5][10] = {"ÀÏÁ¤ ÀÔ·Â","ÀÔ·Â ¼öÁ¤","ÀÏÁ¤ °Ë»ö","ÀÏÁ¤»èÁ¦","ÀÌÀü"};
+	char str[5][10] = {"ì¼ì • ì…ë ¥","ì…ë ¥ ìˆ˜ì •","ì¼ì • ê²€ìƒ‰","ì¼ì •ì‚­ì œ","ì´ì „"};
 	
 	for(i = 1; i < 10; i+=2){
 		gotoxy(18,4+i);
@@ -1098,7 +1095,7 @@ void print_menu1(){
 }
 void print_menu2(){
 	int i, j = 0;
-	char str[5][10] = {"ÀüÃ¼Ãâ·Â", "ÀÏÁ¤Ã¼Å©", "´Ş¼º·ü", "´Ş·Â", "ÀÌÀü"};
+	char str[5][10] = {"ì „ì²´ì¶œë ¥", "ì¼ì •ì²´í¬", "ë‹¬ì„±ë¥ ", "ë‹¬ë ¥", "ì´ì „"};
 	
 	for(i = 1; i < 10; i+=2){
 		gotoxy(18,4+i);
@@ -1113,10 +1110,10 @@ void print_menu2(){
 int menu_print(){
 	int select;
 	
-	SetConsoleTitle("¹Î¼öÀÇ ÀÏÁ¤°ü¸®"); //ÄÜ¼ÖÃ¢ ÀÌ¸§ º¯°æ 
-	system("mode con cols=90 lines=30");//ÄÜ¼Ö Å©±â ¼³Á¤ 
+	SetConsoleTitle("ë¯¼ìˆ˜ì˜ ì¼ì •ê´€ë¦¬"); //ì½˜ì†”ì°½ ì´ë¦„ ë³€ê²½ 
+	system("mode con cols=90 lines=30");//ì½˜ì†” í¬ê¸° ì„¤ì • 
 	
-	init_struct();//±¸Á¶Ã¼ ÃÊ±âÈ­ 
+	init_struct();//êµ¬ì¡°ì²´ ì´ˆê¸°í™” 
 	
 	while(1){
 		system("cls");
@@ -1126,20 +1123,20 @@ int menu_print(){
 		print_menu();
 		
 		gotoxy(30,17);
-		printf("\n¸Ş´º¸¦ ¼±ÅÃÇÏ¼¼¿ä : ");
+		printf("\në©”ë‰´ë¥¼ ì„ íƒí•˜ì„¸ìš” : ");
 		scanf("%d",&select);
 		switch(select){
 			case 1: 
 				menu_print1();
-				break;//ÀÏÁ¤±â´É(¸Ş´º1)
+				break;//ì¼ì •ê¸°ëŠ¥(ë©”ë‰´1)
 			case 2:
 				menu_print2();
-				break;//ºÎ°¡±â´É(¸Ş´º2) 
+				break;//ë¶€ê°€ê¸°ëŠ¥(ë©”ë‰´2) 
 			default:
 				return 0;
 		}
 	}
-}//Ã³À½ ¸Ş´º 
+}//ì²˜ìŒ ë©”ë‰´ 
 
 int menu_print1(){
 	int select;
@@ -1152,23 +1149,23 @@ int menu_print1(){
 		print_menu1();
 		
 		gotoxy(30,17);
-		printf("\n¸Ş´º¸¦ ¼±ÅÃÇÏ¼¼¿ä : ");
+		printf("\në©”ë‰´ë¥¼ ì„ íƒí•˜ì„¸ìš” : ");
 		scanf("%d",&select);
 		switch(select){
 			case 1: 
 				input();
-				break;//ÀÔ·Â 
+				break;//ì…ë ¥ 
 			case 2:
-				modify();//¼öÁ¤ 
+				modify();//ìˆ˜ì • 
 				break;
 			case 3:
-				find();//°Ë»ö
+				find();//ê²€ìƒ‰
 				break;
 			case 4:
-				delete1();//»èÁ¦ 
+				delete1();//ì‚­ì œ 
 				break;
 			case 5:
-				return 0;//Á¾·á 
+				return 0;//ì¢…ë£Œ 
 			default:
 				return 0;
 		}
@@ -1186,12 +1183,12 @@ int menu_print2(){
 		print_menu2();
 		
 		gotoxy(30,17);
-		printf("\n¸Ş´º¸¦ ¼±ÅÃÇÏ¼¼¿ä : ");
+		printf("\në©”ë‰´ë¥¼ ì„ íƒí•˜ì„¸ìš” : ");
 		scanf("%d",&select);
 		switch(select){
 			case 1:
 				all_print();
-				break; 	//ÀüÃ¼Ãâ·Â 
+				break; 	//ì „ì²´ì¶œë ¥ 
 			case 2:
 				check_OX();
 				break;
@@ -1200,7 +1197,7 @@ int menu_print2(){
 				break;
 			case 4: 
 				calendar();
-				return 0;//Á¾·á 
+				return 0;//ì¢…ë£Œ 
 			case 5:
 				return 0;
 			default:
